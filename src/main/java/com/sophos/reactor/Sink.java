@@ -19,7 +19,10 @@ public class Sink {
 		;
 
 		sink.asFlux()
-			.flatMap(palabra -> Flux.fromArray(palabra.split("")).map(String::toLowerCase).collectList())
+			.flatMap(palabra -> Flux.fromArray(palabra.split(""))
+				.map(String::toLowerCase)
+				.collectList()
+			)
 			.subscribe(System.out::println)
 		;
 
