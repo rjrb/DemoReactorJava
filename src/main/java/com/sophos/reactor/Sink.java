@@ -3,7 +3,6 @@ package com.sophos.reactor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
-import java.util.List;
 import java.util.Random;
 
 public class Sink {
@@ -20,7 +19,7 @@ public class Sink {
 		;
 
 		sink.asFlux()
-			.flatMap(palabra -> Flux.just(List.of(palabra.split(""))))
+			.flatMap(palabra -> Flux.fromArray(palabra.split("")).map(String::toLowerCase).collectList())
 			.subscribe(System.out::println)
 		;
 
@@ -38,4 +37,5 @@ public class Sink {
 		}
 		sink.tryEmitComplete().orThrow();
 	}
+
 }
