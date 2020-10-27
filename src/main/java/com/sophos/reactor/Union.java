@@ -72,6 +72,7 @@ public class Union {
 
 	private static void switchIfEmpty() {
 		Flux.just(1, 3, 5, 7, 9)
+			.concatWith(Mono.just(23))
 			.filter(i -> i % 2 == 0)
 			.map(String::valueOf)
 			.switchIfEmpty(Mono.just("Vacío"))

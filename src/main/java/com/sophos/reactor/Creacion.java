@@ -128,6 +128,7 @@ public class Creacion {
 
 		// Crear un Flux infinito
 		Disposable interval = Flux.interval(Duration.ofMillis(500))
+			.elapsed()
 			.doOnNext(System.out::println)
 			.subscribe()
 		;

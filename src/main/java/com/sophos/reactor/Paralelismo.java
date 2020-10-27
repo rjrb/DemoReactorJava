@@ -21,7 +21,7 @@ public class Paralelismo {
 	}
 
 	private static void subscribeOn() {
-		Scheduler scheduler = Schedulers.newElastic("miHilo", 5);
+		Scheduler scheduler = Schedulers.newBoundedElastic(10, 5, "miHilo", 5);
 		Flux.just("Hola", "mundo", "asíncrono")
 			.log()
 			.doOnNext(valor -> System.out.println("Hilo inicial: " + Thread.currentThread().getName() + " - " + valor))
@@ -33,7 +33,7 @@ public class Paralelismo {
 	}
 
 	private static void publishOn() {
-		Scheduler scheduler = Schedulers.newElastic("miHilo", 5);
+		Scheduler scheduler = Schedulers.newBoundedElastic(10, 5, "miHilo", 5);
 		Flux.just("Hola", "mundo", "asíncrono")
 			.doOnNext(valor -> System.out.println("Hilo inicial: " + Thread.currentThread().getName() + " - " + valor))
 			.doOnEach(signal -> System.out.println("Señal: " + signal))
